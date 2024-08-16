@@ -98,10 +98,12 @@ in {
       secretKeyFile = config.sops.secrets."api_keys/duo".path;
       ssh.enable = true;
     };
-    sops.secrets."api_keys/duo" = mkIf cfg.duosec {
+   /* 
+      sops.secrets."api_keys/duo" = mkIf cfg.duosec {
       mode = "0600";
       path = "/run/secrets/api_keys/duo";
     };
+   */
     security.pam.services = mkIf cfg.duosec {
       "login".duoSecurity.enable = true;
       "sddm".duoSecurity.enable = mkIf config.dr460nixed.desktops.enable true;
